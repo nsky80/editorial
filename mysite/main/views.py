@@ -17,10 +17,22 @@ def single_slug(request, single_slug):
 					  template_name='main/home.html',
 					  context={"essays": matching_essay, "part_one": essay_urls}
 					  )
+		# For testing Purpose
+		# matching_essay = list(map(lambda x: x.essay_title, matching_essay))  
+		# for i in EssaySeries.objects.all():
+		# 	if i.series_slug == single_slug:
+		# 		matching_series = i.series_title
+		# 		break
+		# matching_essays_slug = []
+		# for e in Essay.objects.all():
+		# 	if e.series_title.series_title == matching_series:
+		# 		matching_essays_slug.append(e.essay_slug)
+		# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
+	messages.warning(request, "Kaha Chal Diye Guru!!????")
 	return render(request=request,
-				  template_name='main/under_construction.html',
-				  context={"pagename":single_slug}
-				 )
+				template_name='main/under_construction.html',
+				context={"pagename":single_slug}
+				)
 	
 
 def experiment(request):

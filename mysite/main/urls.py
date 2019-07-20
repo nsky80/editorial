@@ -11,5 +11,5 @@ urlpatterns = [
 	path('community', views.community, name="community"),
 	path('account', views.account, name="account"),
 	path('experiment', views.experiment, name="experiment"),
-	# path('<single_slug>', views.single_slug, name="single_slug"),
+	path('<single_slug>', views.single_slug, name="single_slug"),
 ]
