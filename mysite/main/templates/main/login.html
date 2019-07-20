@@ -1,0 +1,18 @@
+{% extends 'main/header.html' %}
+    {% block title %}Login | Authorize Yourself and Explore!{% endblock %}
+
+{% block content %}
+<div class="container">
+		<center><h2>Login Yourself!</h2></center>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <br>
+            <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign in</button>
+
+        </form>
+        <br>
+        If you don't have an account <a href="/register" class="waves-effect waves-light btn"><i class="material-icons left">
+        people</i>Register</a> instead.
+</div>
+{% endblock %}

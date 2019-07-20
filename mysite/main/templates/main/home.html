@@ -1,0 +1,18 @@
+{% extends 'main/header.html' %}
+    {% block title %}Home | Let's Start Exploring new Technologies{% endblock %}
+
+    {% block content %}
+
+        <div class="container ">
+			{% for es, partone in part_one.items %}
+				<h1>{{es.essay_title}}</h1>
+				<h4>{{es.essay_published}}</h4>
+				<p>{{es.essay_content}}</p>
+				<hr>
+            {% endfor %}
+
+
+            <a href="/experiment" class="waves-effect waves-yellow btn"><i class="material-icons left">build</i>
+                Experiments</a>
+		</div>
+	{% endblock %}

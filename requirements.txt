@@ -1,0 +1,9 @@
+1. Python 3.6.5
+2. django version-2.1.5:
+3. Materialize css(included)
+4. Materialize javascript(included)
+      -ref: https://materializecss.com/getting-started.html
+5. Google API of icons
+      -ref: https://fonts.googleapis.com/icon?family=Material+Icons
+6. Google API of fonts
+      -ref: https://fonts.googleapis.com/css?family=Raleway

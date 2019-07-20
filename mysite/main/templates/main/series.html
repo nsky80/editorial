@@ -1,0 +1,20 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+<div class = "container">
+    <div class="row">
+        {% for cat in series %}
+            <div class="col s12 m6 l4">
+                <a href="{{cat.series_slug}}", style="color:#000">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <div class="card-title">{{cat.series_title}}</div>
+                            <p>{{cat.series_summary}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
