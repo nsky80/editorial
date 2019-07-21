@@ -2,11 +2,26 @@ from django.db import models
 from django.utils import timezone
 # Create your models here.
 
+
+class EssayCategory(models.Model):
+	category_title = models.CharField(max_length=100)
+	category_summary = models.CharField(max_length=200)
+	category_slug = models.CharField(max_length=50, default=1)
+
+	class Meta:
+		verbose_name_plural = "Categories"
+
+	def __str__(self):
+		return self.category_title
+
+
 class EssaySeries(models.Model):
 	series_title = models.CharField(max_length=100)
 	series_summary = models.CharField(max_length=200)
 	series_slug = models.CharField(max_length=50, default=1)
 	
+	category_title = models.ForeignKey(EssayCategory, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT)
+
 	class Meta:
 		verbose_name_plural = "Series"
 	
@@ -16,7 +31,7 @@ class EssaySeries(models.Model):
 		
 class Essay(models.Model):
 	essay_title = models.CharField(max_length=100)
-	essy_published = models.DateTimeField("Date Published", default=timezone.now)
+	essay_published = models.DateTimeField("Date Published", default=timezone.now)
 	essay_content = models.TextField()
 
 	

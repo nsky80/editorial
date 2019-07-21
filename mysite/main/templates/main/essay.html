@@ -1,0 +1,15 @@
+{% extends 'main/header.html' %}
+    {% block title %}{{essay.essay_title}}{% endblock %}
+
+    {% block content %}
+
+        <div class="container ">
+				<h1>{{essay.essay_title}}</h1>
+				<h4>{{essay.essay_published}}</h4>
+				<p>{{essay.essay_content}}</p>
+				<hr>
+
+            <a href="/experiment" class="waves-effect waves-yellow btn"><i class="material-icons left">build</i>
+                Experiments</a>
+		</div>
+	{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Essay, EssaySeries
+from .models import Essay, EssaySeries, EssayCategory
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -7,16 +7,38 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 def single_slug(request, single_slug):
+	# First we search any url in category and then series after that main content
+	categories = [c.category_slug for c in EssayCategory.objects.all()]
+	if single_slug in categories:
+		matching_series = EssaySeries.objects.filter(category_title__category_slug=single_slug)	
+		return render(request=request,
+						template_name="main/series.html",
+						context={"series":matching_series.all(), "category_title": " ".join(single_slug.split("-")).title()}
+						)
+	# now searching url in series
 	series = [s.series_slug for s in EssaySeries.objects.all()]
 	if single_slug in series:
 		matching_essay = Essay.objects.filter(series_title__series_slug=single_slug)
-		essay_urls = {}
-		for m in matching_essay.all():
-			essay_urls[m] = m.essay_slug
 		return render(request=request,
-					  template_name='main/home.html',
-					  context={"essays": matching_essay, "part_one": essay_urls}
+					  template_name='main/essays.html',
+					  context={"essays": matching_essay.all(), "series_title": " ".join(single_slug.split("-")).title()}
 					  )
+
+	# Now we are going to main content
+	essays = [e.essay_slug for e in Essay.objects.all()]
+	if single_slug in essays:
+		this_essay = Essay.objects.get(essay_slug=single_slug)
+
+		return render(request = request,
+						template_name='main/essay.html',
+						context = {"essay":this_essay})
+
+	# If slug doesn't exist anywhere then
+	messages.warning(request, "Kaha Chal Diye Guru!!????")
+	return render(request=request,
+				template_name='main/under_construction.html',
+				context={"pagename":single_slug}
+				)
 		# For testing Purpose
 		# matching_essay = list(map(lambda x: x.essay_title, matching_essay))  
 		# for i in EssaySeries.objects.all():
@@ -28,11 +50,6 @@ def single_slug(request, single_slug):
 		# 	if e.series_title.series_title == matching_series:
 		# 		matching_essays_slug.append(e.essay_slug)
 		# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
-	messages.warning(request, "Kaha Chal Diye Guru!!????")
-	return render(request=request,
-				template_name='main/under_construction.html',
-				context={"pagename":single_slug}
-				)
 	
 
 def experiment(request):
@@ -44,14 +61,13 @@ def experiment(request):
 		return redirect("main:about")
 
 
-# Create your views here.
 def homepage(request):
 	return render(request=request, 
-				  template_name="main/series.html",
-				  context={"series":EssaySeries.objects.all}
-				 )
-				 
+				  template_name="main/home.html",
+				  context={"category":EssayCategory.objects.all}
+				 )			 
 				
+
 def logout_request(request):
 	logout(request)
 	messages.info(request, "Logged out successfully!")
@@ -106,6 +122,7 @@ def register(request):
 				  context={"form":form}
 				 )
 				 
+
 def about(request):
 	return render(request=request, 
 				  template_name="main/about.html",
