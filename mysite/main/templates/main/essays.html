@@ -16,7 +16,7 @@
                             <br><span class="card-title"><h6><b>{{es.essay_title}}</b></h6></span>
                         </div>
                         <div class="card-content">
-                            <p>{{es.essay_content | truncatechars_html:100}}</p>
+                            <p>{{es.essay_content | truncatechars_html:100|safe}}</p>
                         </div>
                         <div class="card-action right-align">
                             <a href="{{es.essay_slug}}" class="waves-effect waves-light btn" style="color:#000000; background-color:light blue">Read More..</a>

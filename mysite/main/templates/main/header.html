@@ -10,16 +10,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <style>body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}</style>
     <script type="text/javascript" src="{% static 'main/js/bin/materialize.min.js' %}"></script>
+    <!-- Configurations of tinymce app -->
+    <script src="{% static 'tinymce/js/prism.js' %}"></script>
+    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
 </head>
 <body>
 	{% include 'main/includes/navbar.html' %}
 	{% include 'main/includes/fixed_action_button.html' %}
   {% include 'main/includes/messaging.html' %}
-  <br><br>
+  <br>
 	{% block content %}
 	{% endblock %}
 	<br>
-    {% include 'main/includes/footer.html' %}
-    <script type="text/javascript">M.AutoInit();</script>
+  {% include 'main/includes/footer.html' %}
+  <script type="text/javascript">M.AutoInit();</script>
 </body>
 </html>
