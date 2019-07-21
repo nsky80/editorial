@@ -1,20 +1,28 @@
 {% extends 'main/header.html' %}
 {% block title %}Cateogry:&nbsp;{{category_title}}{% endblock %}
 {% block content %}
-<br>
-<div class = "container">
+
+<div class="container style="max-width:1500px; min-height:100%">
+    <br>
     <a href="javascript:history.go(-1);" class="waves-effect waves-yellow btn">
             <i class="material-icons left">chevron_left</i>
             <b>Go Back</b>
-    </a><br><br>
-    <div class="row">        
+    </a><br>
+    <div class="row">
         {% for cat in series %}
-            <div class="col s12 m6 l4">
-                <a href="{{cat.series_slug}}", style="color:#000">
-                    <div class="card hoverable">
+        <!-- size 6 on a large screen, 12 on a small, 6 on a med -->
+            <div class="col s12 m6 l6">
+                <a href="{{cat.series_slug}}" class="waves-effect waves-light" style="color:#000">
+                    <div class="card-panel hoverable" style="height:470px; background-color:#FFFFFF;">
+                        <div class="card-image">
+                            <img class="responsive-img" src="{{ cat.series_image.url }}" style="width:400px;height: 280px;">
+                            <br><span class="card-title"><h6><b>{{cat.series_title}}</b></h6></span>
+                        </div>
                         <div class="card-content">
-                            <div class="card-title">{{cat.series_title}}</div>
                             <p>{{cat.series_summary}}</p>
+                        </div>
+                        <div class="card-action center-align">
+                            <a href="{{cat.series_slug}}" class="waves-effect waves-light wide btn" style="color: white; background-color:light blue"><b>Checkout Series</b></a>
                         </div>
                     </div>
                 </a>

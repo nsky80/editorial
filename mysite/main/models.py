@@ -10,6 +10,7 @@ class EssayCategory(models.Model):
 	category_title = models.CharField(max_length=100)
 	category_summary = models.CharField(max_length=200)
 	category_slug = models.CharField(max_length=50, default=1)
+	category_image = models.ImageField(upload_to="images/category/", default="images/sample-1.jpg", blank=True, null=True)
 
 	class Meta:
 		verbose_name_plural = "Categories"
@@ -22,7 +23,9 @@ class EssaySeries(models.Model):
 	series_title = models.CharField(max_length=100)
 	series_summary = models.CharField(max_length=200)
 	series_slug = models.CharField(max_length=50, default=1)
-	
+	series_image = models.ImageField(upload_to="images/series/", default="images/sample-1.jpg", blank=True, null=True)
+
+
 	category_title = models.ForeignKey(EssayCategory, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT)
 
 	class Meta:
@@ -50,4 +53,10 @@ class Essay(models.Model):
 @receiver(post_delete, sender=Essay)
 def submission_delete(sender, instance, **kwargs):
 	instance.essay_image.delete(False) 
+  
+
+# # for deleting images too whenever a object has been deleted
+# @receiver(post_delete, sender=EssayCategory)
+# def submission_delete(sender, instance, **kwargs):
+# 	instance.category_image.delete(False) 
   

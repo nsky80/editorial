@@ -1,16 +1,25 @@
 {% extends 'main/header.html' %}
 {% block title %}Home | Explore{% endblock %}
 {% block content %}
-<br><br>
-<div class = "container">
+
+<div class="container style="max-width:1500px; min-height:100%">
+    <br>
+
     <div class="row">
         {% for cat in category %}
+        <!-- size 6 on a large screen, 12 on a small, 6 on a med -->
             <div class="col s12 m6 l4">
-                <a href="{{cat.category_slug}}", style="color:#000">
-                    <div class="card hoverable">
+                <a href="{{cat.category_slug}}" class="waves-effect waves-light" style="color:#000">
+                    <div class="card-panel hoverable" style="height:395px; background-color:#FFFFFF;">
+                        <div class="card-image">
+                            <img class="responsive-img" src="{{ cat.category_image.url }}" style="width:380px;height: 190px;">
+                            <br><span class="card-title"><h6><b>{{cat.category_title}}</b></h6></span>
+                        </div>
                         <div class="card-content">
-                            <div class="card-title">{{cat.category_title}}</div>
                             <p>{{cat.category_summary}}</p>
+                        </div>
+                        <div class="card-action center-align">
+                            <a href="{{cat.category_slug}}" class="waves-effect waves-light btn" style="color: white; background-color:light blue"><b>Explore</b></a>
                         </div>
                     </div>
                 </a>
