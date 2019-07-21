@@ -12,14 +12,14 @@
                 <a href="{{es.essay_slug}}" class="waves-effect waves-light" style="color:#000">
                     <div class="card-panel hoverable" style="height:470px; background-color:#FFFFFF;">
                         <div class="card-image">
-                            <img class="responsive-img" src="{% static 'main/images/sample-1.jpg' %}"">
+                            <img class="responsive-img" src="{{ es.essay_image.url }}" style="width:400px;height: 280px;">
                             <br><span class="card-title"><h6><b>{{es.essay_title}}</b></h6></span>
                         </div>
                         <div class="card-content">
                             <p>{{es.essay_content | truncatechars_html:100|safe}}</p>
                         </div>
                         <div class="card-action right-align">
-                            <a href="{{es.essay_slug}}" class="waves-effect waves-light btn" style="color:#000000; background-color:light blue">Read More..</a>
+                            <a href="{{es.essay_slug}}" class="waves-effect waves-light btn" style="color: white; background-color:light blue"><b>Read More..</b></a>
                         </div>
                     </div>
                 </a>

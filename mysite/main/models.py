@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+# delete image too when object were deleted
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -33,6 +36,7 @@ class Essay(models.Model):
 	essay_title = models.CharField(max_length=100)
 	essay_published = models.DateTimeField("Date Published", default=timezone.now)
 	essay_content = models.TextField()
+	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
 
 	
 	series_title = models.ForeignKey(EssaySeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
@@ -41,4 +45,9 @@ class Essay(models.Model):
 	def __str__(self):
 		return self.essay_title
 	
-	
+
+# for deleting images too whenever a object has been deleted
+@receiver(post_delete, sender=Essay)
+def submission_delete(sender, instance, **kwargs):
+	instance.essay_image.delete(False) 
+  

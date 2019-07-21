@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings # for images handling
+from django.conf.urls.static import static 
 
 app_name = "main"
 urlpatterns = [
@@ -13,3 +15,9 @@ urlpatterns = [
 	path('experiment', views.experiment, name="experiment"),
 	path('<single_slug>', views.single_slug, name="single_slug"),
 ]
+
+# if settings.DEBUG:
+#         urlpatterns += static(settings.MEDIA_URL,
+#                               document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

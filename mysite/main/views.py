@@ -52,15 +52,6 @@ def single_slug(request, single_slug):
 		# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
 	
 
-def experiment(request):
-	if request.user.is_authenticated:
-		return render(request=request,
-				  template_name='main/experiment.html',
-				 )
-	else:
-		return redirect("main:about")
-
-
 def homepage(request):
 	return render(request=request, 
 				  template_name="main/home.html",
@@ -139,3 +130,12 @@ def account(request):
 	return render(request=request, 
 				  template_name="main/account.html",
 				 )
+
+# this is used for testing for new features
+def experiment(request):
+	if request.user.is_authenticated:
+		return render(request=request,
+				  template_name='main/experiment.html',
+				 )
+	else:
+		return redirect("main:about")

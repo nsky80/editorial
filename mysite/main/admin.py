@@ -8,7 +8,7 @@ class EssayAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Title/date", {'fields': ["essay_title", "essay_published"]}),
         ("Series/Slug", {'fields': ["series_title", "essay_slug"]}),
-        ("Content", {"fields": ["essay_content"]}),
+        ("Content", {"fields": ["essay_image", "essay_content"]}),
     ]
 
     formfield_overrides = {

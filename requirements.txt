@@ -8,3 +8,4 @@
 6. Google API of fonts
       -ref: https://fonts.googleapis.com/css?family=Raleway
 7. Admin Editor django-tinymce4-lite.
+8. Pillow for handelling images.
