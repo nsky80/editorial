@@ -7,3 +7,4 @@
       -ref: https://fonts.googleapis.com/icon?family=Material+Icons
 6. Google API of fonts
       -ref: https://fonts.googleapis.com/css?family=Raleway
+7. Admin Editor django-tinymce4-lite.
