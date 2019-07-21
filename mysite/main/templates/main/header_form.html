@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'main/css/slides.min.css' %}" rel="stylesheet" type="text/css"/>
+
+    <!-- jQuery 3.3.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+        <!-- Compressed Scripts -->
+        <!-- <script src="js/slides.min.js?423331" type="text/javascript"></script> -->
+      <script type="text/javascript" src="{% static 'main/js/slides.min.js' %}"></script>
+
+    <!-- Fonts and Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}</style>  
+    <style type="text/css">
+                    .slides,
+                .slides p {
+                    
+                    font-family: "Raleway", sans-serif;
+                    font-weight: 400;
+                }
+                        .slides h1,
+                .slides h2,
+                .slides h3,
+                .slides h4,
+                .slides h5,
+                .slides h6 {
+                    font-family: 'Raleway', sans-serif;
+                    font-weight: 400;
+                }
+          </style>
+          
+      <!-- My navbar -->
+        <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet"/>
+            <!-- For icon in menu -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="{% static 'main/js/materialize.min.js' %}"></script>
+    </head>
+
+
+<body class="slides film noPreload animated">
+
+	{% include 'main/includes/navbar.html' %}
+	{% include 'main/includes/fixed_action_button.html' %}
+    {% include 'main/includes/messaging.html' %}
+	{% block content %}
+	{% endblock %}
+  <script type="text/javascript">M.AutoInit();</script>
+</body>
+</html>

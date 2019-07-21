@@ -1,18 +1,40 @@
-{% extends 'main/header.html' %}
+{% extends 'main/header_form.html' %}
     {% block title %}Login | Authorize Yourself and Explore!{% endblock %}
 
 {% block content %}
-<div class="container">
-		<center><h2>Login Yourself!</h2></center>
-        <form method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <br>
-            <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign in</button>
 
-        </form>
-        <br>
-        If you don't have an account <a href="/register" class="waves-effect waves-light btn"><i class="material-icons left">
-        people</i>Register</a> instead.
-</div>
+
+
+{% load static %}
+
+<!-- Slide 2 (#55) -->
+<section class="slide fade-6 kenBurns">
+  <div class="content">
+    <div class="container">
+      <div class="wrap">
+
+        <div class="form-55">
+          <div class="pad shadow left selected ae-3">
+                <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+<input type="submit" class="button wide blue gradient ae-10 margin-top-2 cropBottom" value="Sign in">
+<!-- < data-success-text="Done!" data-success-class="message-sent" name="button"  onclick="method()">Send message</button> -->
+           
+                </form>
+                <br>
+                If you don't have an account <a href="/register" class="waves-effect waves-light btn"><i class="material-icons left">
+                people</i>Register</a> instead.
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>  
+  <!-- <div class="background" style="background-image:url(assets/img/background/img-55.jpg)"></div> -->
+  <div class="background" style="background-image:url({% static 'main/images/back2.jpg' %})"></div>
+
+</section>
+
+
 {% endblock %}
