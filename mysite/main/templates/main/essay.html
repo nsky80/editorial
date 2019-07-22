@@ -1,29 +1,57 @@
 {% extends 'main/header.html' %}
     {% block title %}{{essay.essay_title}}{% endblock %}
 
-    {% block content %}
-<br>
-        <div class="container ">
+{% block content %}
 
-
-				<!-- <nav class="brown darken-1"> -->
-						<!-- <div class="nav-wrapper" > -->
-						  <div class="col s12" style="font-size: 130%">
-							<a href="javascript:history.go(-3);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to Categories">&nbsp;<b>All Category&nbsp;&nbsp;></b></a>
-							<a href="javascript:history.go(-2);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to {{category}} Category"><b>&nbsp;&nbsp;{{category}}&nbsp;&nbsp;></b></a>
-							<a href="javascript:history.go(-1);"  class=" tooltipped" data-position="bottom" data-tooltip="Go to {{essay.series_title}}"><b>&nbsp;&nbsp;{{essay.series_title}}&nbsp;&nbsp;></b></a>
-							<a href="javascript:history.go(0);"  class=" tooltipped" data-position="bottom" data-tooltip="Continue Reading"><b>&nbsp;&nbsp;{{essay.essay_title}}</b></a>
-						  </div>
-						<!-- </div> -->
-				<!-- </nav> -->
-					
-
-				<h1>{{essay.essay_title}}</h1>
-				<h4>{{essay.essay_published}}</h4>
-				<p>{{essay.essay_content|safe}}</p>
-				<hr>
-
-            <a href="/experiment" class="waves-effect waves-yellow btn"><i class="material-icons left">build</i>
-                Experiments</a>
+    <!-- Page Layout here -->
+    <div class="row" >
+		<div class="col s12 m4 l3" >
+				<!-- Grey navigation panel -->
+			<ul class="collapsible popout">
+					<h5><b>Articles of {{essay.series_title}} Series</b></h5>
+					{% for ess in sidebar %}
+						{% if forloop.counter0 == this_essay_idx %}
+							<li class="active">
+								<div class="collapsible-header">
+									<b>{{ess.essay_title}}</b><br>(currently viewing)
+								</div>
+							</li>
+						{% else %}
+							<li>
+								<div class="collapsible-header"><b>{{ess.essay_title}}</b></div>
+								<div class="collapsible-body">
+									<p>
+										{{ess.essay_content | truncatewords_html:12|safe}}
+									</p>
+									<p>
+										<a href="/{{ess.essay_slug}}">
+											<button class="btn waves-effect waves-light right-align" style="background-color:blue; color:white">
+												<b>Continue Reading..</b>
+											</button>
+										</a>
+									</p>
+	
+								</div>
+							</li>
+						{% endif %}
+					{% endfor %}
+			</ul>
 		</div>
-	{% endblock %}
+		<br>
+		<div class="col s12 m8 l9 hoverable" style="background-color: rgb(250, 250, 250)">
+			<!-- teal content -->
+			<br>
+			<div class="col s12" style="font-size: 130%">
+				<a href="javascript:history.go(-3);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to Categories">&nbsp;<b>All Category&nbsp;&nbsp;></b></a>
+				<a href="javascript:history.go(-2);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to {{category}} Category"><b>&nbsp;&nbsp;{{category}}&nbsp;&nbsp;></b></a>
+				<a href="javascript:history.go(-1);"  class=" tooltipped" data-position="bottom" data-tooltip="Go to {{essay.series_title}}"><b>&nbsp;&nbsp;{{essay.series_title}}&nbsp;&nbsp;></b></a>
+				<a href="javascript:history.go(0);"  class=" tooltipped" data-position="bottom" data-tooltip="Continue Reading"><b>&nbsp;&nbsp;{{essay.essay_title}}</b></a>
+			</div>
+			<br>
+			<h3><b>{{essay.essay_title}}</b></h3>
+			<p><b>{{essay.essay_published}}</b></p>
+			<hr>
+			<p>{{essay.essay_content|safe}}</p>
+		</div>
+	</div>
+{% endblock %}

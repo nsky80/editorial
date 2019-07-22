@@ -15,13 +15,12 @@
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: #eeeeee ;">
 	{% include 'main/includes/navbar.html' %}
 	{% include 'main/includes/fixed_action_button.html' %}
   {% include 'main/includes/messaging.html' %}
 	{% block content %}
 	{% endblock %}
-	<br>
   {% include 'main/includes/footer.html' %}
   <script type="text/javascript">M.AutoInit();</script>
 </body>

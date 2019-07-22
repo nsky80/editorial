@@ -33,9 +33,17 @@ def single_slug(request, single_slug):
 		this_essay = Essay.objects.get(essay_slug=single_slug)
 		this_series = EssaySeries.objects.get(series_title=this_essay.series_title)
 		this_category = EssayCategory.objects.get(category_title=this_series.category_title)
+
+		essay_from_series = Essay.objects.filter(series_title__series_title=this_essay.series_title).order_by('essay_published')
+		this_essay_idx = list(essay_from_series).index(this_essay)
+
+
 		return render(request = request,
 						template_name='main/essay.html',
-						context = {"essay":this_essay, "category": this_category.category_title})
+						context = {"essay":this_essay, "category": this_category.category_title,
+								   "sidebar": essay_from_series,
+                               	   "this_essay_idx": this_essay_idx,
+								   })
 
 	# If slug doesn't exist anywhere then
 	messages.warning(request, "Kaha Chal Diye Guru!!????")
@@ -131,9 +139,12 @@ def community(request):
 				 
 				 
 def account(request):
-	return render(request=request, 
+	if request.user.is_authenticated:
+		return render(request=request, 
 				  template_name="main/account.html",
 				 )
+	else:
+		return redirect("main:login")
 
 # this is used for testing for new features
 def experiment(request):
