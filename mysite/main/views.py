@@ -11,27 +11,31 @@ def single_slug(request, single_slug):
 	categories = [c.category_slug for c in EssayCategory.objects.all()]
 	if single_slug in categories:
 		matching_series = EssaySeries.objects.filter(category_title__category_slug=single_slug)	
+		this_category = EssayCategory.objects.get(category_slug=single_slug)
 		return render(request=request,
 						template_name="main/series.html",
-						context={"series":matching_series.all(), "category_title": " ".join(single_slug.split("-")).title()}
+						context={"series":matching_series.all(), "category": this_category}
 						)
 	# now searching url in series
 	series = [s.series_slug for s in EssaySeries.objects.all()]
 	if single_slug in series:
 		matching_essay = Essay.objects.filter(series_title__series_slug=single_slug)
+		# for navbar
+		this_series = EssaySeries.objects.get(series_slug=single_slug)
 		return render(request=request,
 					  template_name='main/essays.html',
-					  context={"essays": matching_essay.all(), "series_title": " ".join(single_slug.split("-")).title()}
+					  context={"essays": matching_essay.all(), "series": this_series}
 					  )
 
 	# Now we are going to main content
 	essays = [e.essay_slug for e in Essay.objects.all()]
 	if single_slug in essays:
 		this_essay = Essay.objects.get(essay_slug=single_slug)
-
+		this_series = EssaySeries.objects.get(series_title=this_essay.series_title)
+		this_category = EssayCategory.objects.get(category_title=this_series.category_title)
 		return render(request = request,
 						template_name='main/essay.html',
-						context = {"essay":this_essay})
+						context = {"essay":this_essay, "category": this_category.category_title})
 
 	# If slug doesn't exist anywhere then
 	messages.warning(request, "Kaha Chal Diye Guru!!????")

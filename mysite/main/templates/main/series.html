@@ -1,13 +1,18 @@
 {% extends 'main/header.html' %}
-{% block title %}Cateogry:&nbsp;{{category_title}}{% endblock %}
+{% block title %}Cateogry:&nbsp;{{category.category_title}}{% endblock %}
 {% block content %}
 
 <div class="container style="max-width:1500px; min-height:100%">
     <br>
-    <a href="javascript:history.go(-1);" class="waves-effect waves-yellow btn">
-            <i class="material-icons left">chevron_left</i>
-            <b>Go Back</b>
-    </a><br>
+    <!-- <nav class="brown darken-1"> -->
+            <!-- <div class="nav-wrapper"> -->
+              <div class="col s12" style="font-size: 130%">
+                <a href="javascript:history.go(-1);" class="tooltipped" data-position="bottom" data-tooltip="Go to Categories">&nbsp;<b>All Category</b>&nbsp;&nbsp;></a>
+                <a href="javascript:history.go(0);" class="tooltipped" data-position="bottom" data-tooltip="Continue to {{category.category_title}} Category">&nbsp;&nbsp;<b>{{category.category_title}}</b></a>
+               </div>
+            <!-- </div> -->
+    <!-- </nav> -->
+
     <div class="row">
         {% for cat in series %}
         <!-- size 6 on a large screen, 12 on a small, 6 on a med -->

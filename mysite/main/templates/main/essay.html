@@ -2,8 +2,22 @@
     {% block title %}{{essay.essay_title}}{% endblock %}
 
     {% block content %}
-
+<br>
         <div class="container ">
+
+
+				<!-- <nav class="brown darken-1"> -->
+						<!-- <div class="nav-wrapper" > -->
+						  <div class="col s12" style="font-size: 130%">
+							<a href="javascript:history.go(-3);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to Categories">&nbsp;<b>All Category&nbsp;&nbsp;></b></a>
+							<a href="javascript:history.go(-2);"   class=" tooltipped" data-position="bottom" data-tooltip="Go to {{category}} Category"><b>&nbsp;&nbsp;{{category}}&nbsp;&nbsp;></b></a>
+							<a href="javascript:history.go(-1);"  class=" tooltipped" data-position="bottom" data-tooltip="Go to {{essay.series_title}}"><b>&nbsp;&nbsp;{{essay.series_title}}&nbsp;&nbsp;></b></a>
+							<a href="javascript:history.go(0);"  class=" tooltipped" data-position="bottom" data-tooltip="Continue Reading"><b>&nbsp;&nbsp;{{essay.essay_title}}</b></a>
+						  </div>
+						<!-- </div> -->
+				<!-- </nav> -->
+					
+
 				<h1>{{essay.essay_title}}</h1>
 				<h4>{{essay.essay_published}}</h4>
 				<p>{{essay.essay_content|safe}}</p>
