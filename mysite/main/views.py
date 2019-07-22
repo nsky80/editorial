@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Essay, EssaySeries, EssayCategory
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -82,6 +82,7 @@ def logout_request(request):
 	
 def login_request(request):
 	if request.user.is_authenticated:
+		# return HttpResponse('<script>history.back();</script>')
 		return redirect("main:account")
 	if request.method == "POST":
 		form = AuthenticationForm(request=request, data=request.POST)
@@ -92,7 +93,7 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}")
-				return redirect("/")
+				return HttpResponse('<script>javascript:history.go(-2);</script>')
 			else:
 				messages.error(request, "Invalid username or password.")
 		else:
@@ -169,3 +170,13 @@ def experiment(request):
 				 )
 	else:
 		return redirect("main:about")
+
+
+def write_request(request):
+	if request.user.is_authenticated:
+		return render(request=request,
+						template_name="main/user_write.html",
+						)
+	else:
+		messages.warning(request, f"For Community Login first!")
+		return redirect("main:login")

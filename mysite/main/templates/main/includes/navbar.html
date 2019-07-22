@@ -10,7 +10,8 @@
                 <li class="active"><a href="/"><i class="material-icons left">home</i>Home</a></li>
                 <li><a href="/community"><i class="material-icons left">people</i>Community</a></li>
                 {% if user.is_authenticated %}
-
+                    <li class="tooltipped" data-position="down" data-tooltip="Contribute"><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
+   
                     <li>                         <!-- Dropdown Trigger -->
                         <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>{{user.username}}</a>
 
@@ -40,6 +41,7 @@
         <li class="active"><a href="/"><i class="material-icons left">home</i>Home</a></li>
         <li><a href="#"><i class="material-icons left">people</i>Community</a></li>
         {% if user.is_authenticated %}
+            <li><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
             <li>
                 <ul id="dropdown2" class="dropdown-content">
                     <li><a href="/account">Account</a></li>
