@@ -7,10 +7,10 @@
 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="/"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="/community"><i class="material-icons left">people</i>Community</a></li>
+                <li {% if request.get_full_path == '/' %}class="active"{% endif %}><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                <li {% if request.get_full_path == '/community' %}class="active"{% endif %}><a href="/community"><i class="material-icons left">people</i>Community</a></li>
                 {% if user.is_authenticated %}
-                    <li class="tooltipped" data-position="down" data-tooltip="Contribute"><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
+                    <li class="tooltipped {% if request.get_full_path == '/write_content' %}active{% endif %}" data-position="down" data-tooltip="Contribute"><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
    
                     <li>                         <!-- Dropdown Trigger -->
                         <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>{{user.username}}</a>
@@ -27,9 +27,9 @@
                     </li>
                     <li><a href="/logout" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Logout</a></li>
                 {% else %}
-                    <li><a href="/register"><i class="material-icons left">person_add</i>Register</a></li>
-					<li><a href="/login" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Login</a></li>
-					<li><a href="/about"><i class="material-icons left">domain</i>About</a></li>
+                    <li {% if request.get_full_path == '/register' %}class="active"{% endif %}><a href="/register"><i class="material-icons left">person_add</i>Register</a></li>
+					<li {% if request.get_full_path == '/login' %}class="active"{% endif %}><a href="/login" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Login</a></li>
+					<li {% if request.get_full_path == '/about' %}class="active"{% endif %}><a href="/about"><i class="material-icons left">domain</i>About</a></li>
                 {% endif %}
 
             </ul>
@@ -38,10 +38,10 @@
 </div>
 
     <ul class="sidenav" id="mobile-demo">
-        <li class="active"><a href="/"><i class="material-icons left">home</i>Home</a></li>
-        <li><a href="#"><i class="material-icons left">people</i>Community</a></li>
+        <li {% if request.get_full_path == '/' %}class="active"{% endif %}><a href="/"><i class="material-icons left">home</i>Home</a></li>
+        <li {% if request.get_full_path == '/community' %}class="active"{% endif %}><a href="/community"><i class="material-icons left">people</i>Community</a></li>
         {% if user.is_authenticated %}
-            <li><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
+            <li {% if request.get_full_path == '/write_content' %}class="active"{% endif %}><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
             <li>
                 <ul id="dropdown2" class="dropdown-content">
                     <li><a href="/account">Account</a></li>
@@ -55,8 +55,8 @@
             </li>
 		    <li><a href="/logout" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Logout</a></li>
         {% else %}
-			<li><a href="/register"><i class="material-icons left">person_add</i>Register</a></li>
-			<li><a href="/login" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Login</a></li>
-			<li><a href="/about"><i class="material-icons left">domain</i>About</a></li>
+			<li {% if request.get_full_path == '/register' %}class="active"{% endif %}><a href="/register"><i class="material-icons left">person_add</i>Register</a></li>
+			<li {% if request.get_full_path == '/login' %}class="active"{% endif %}><a href="/login" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Login</a></li>
+			<li {% if request.get_full_path == '/about' %}class="active"{% endif %}><a href="/about"><i class="material-icons left">domain</i>About</a></li>
         {% endif %}
     </ul>

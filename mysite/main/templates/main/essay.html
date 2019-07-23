@@ -48,10 +48,12 @@
 				<a href="javascript:history.go(0);"  class=" tooltipped" data-position="bottom" data-tooltip="Continue Reading"><b>&nbsp;&nbsp;{{essay.essay_title}}</b></a>
 			</div>
 			<br>
-			<h3><b>{{essay.essay_title}}</b></h3>
-			<p><b>{{essay.essay_published}}</b></p>
-			<hr>
-			<p>{{essay.essay_content|safe}}</p>
+			<div style="margin: 10px">
+				<h3><b>{{essay.essay_title}}</b></h3>
+				<p><b>{{essay.essay_published}}</b></p>
+				<hr>
+				<p>{{essay.essay_content|safe}}</p>
+			</div>
 		</div>
 	</div>
 {% endblock %}

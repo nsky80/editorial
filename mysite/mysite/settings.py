@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites',     #
+    # 'django.contrib.flatpages',  #
     'tinymce',
 	'main.apps.MainConfig',
 ]
@@ -107,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # http://romanvm.github.io/django-tinymce4-lite/configuration.html
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
-    'width': 1120,
+    'width': 858,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',

@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User		# for community tab purpose
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+from .forms import Write_content, ContactForm
 
 
 def single_slug(request, single_slug):
@@ -164,18 +165,21 @@ def account(request):
 
 # this is used for testing for new features
 def experiment(request):
-	if request.user.is_authenticated:
-		return render(request=request,
-				  template_name='main/experiment.html',
-				 )
-	else:
-		return redirect("main:about")
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'main/experiment.html', {'form': form})
 
 
 def write_request(request):
 	if request.user.is_authenticated:
+		form = Write_content()
 		return render(request=request,
 						template_name="main/user_write.html",
+						context={"form":form}
 						)
 	else:
 		messages.warning(request, f"For Community Login first!")

@@ -38,13 +38,13 @@ class EssaySeries(models.Model):
 class Essay(models.Model):
 	essay_title = models.CharField(max_length=100)
 	essay_published = models.DateTimeField("Date Published", default=timezone.now)
-	essay_content = models.TextField()
-	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
+	essay_content = models.TextField(help_text='Write here your message!')
 
 	
 	series_title = models.ForeignKey(EssaySeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
 	essay_slug = models.CharField(max_length=50, default=1)
-	
+	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
+
 	def __str__(self):
 		return self.essay_title
 	
