@@ -185,6 +185,11 @@ def write_request(request):
 					series = "".join(filter(str.isalpha, map(lambda x: x[0], str(form.cleaned_data.get('series_title')).split(" ")))).upper()
 					title = form.cleaned_data.get('essay_title')
 					obj.essay_slug = series + "-" + "-".join(title.split(" ")[:4]).lower()
+
+					current_series = EssaySeries.objects.get(series_title=obj.series_title)
+					current_category = EssayCategory.objects.get(category_title=current_series.category_title)
+					obj.category_title = current_category
+
 					obj.save()
 					form.save(commit=True)
 					# current_series = EssaySeries.objects.get(series_title=obj.series_title)
