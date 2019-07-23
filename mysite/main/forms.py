@@ -2,7 +2,6 @@ from django import forms
 from .models import EssaySeries, Essay
 # from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
-# from django.contrib.flatpages.models import FlatPage
 
 
 class TinyMCEWidget(TinyMCE):
@@ -18,11 +17,6 @@ class Write_content(forms.ModelForm):
             attrs={'required': False, 'cols': 30, 'rows': 10}
         )
     )
-
-    # class Meta:
-    #     model = Post
-    #     fields = '__all__'
-
 
     class Meta:
         model = Essay

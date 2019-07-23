@@ -121,9 +121,9 @@ def register(request):
 			for msg in form.error_messages:
 				messages.error(request, f"{msg}:{form.error_messages[msg]}")
 
-				return render(request=request,
-								template_name="main/register.html",
-								context={"form": form})
+			return render(request=request,
+							template_name="main/register.html",
+							context={"form": form})
 	form = UserCreationForm
 	return render(request=request, 
 				  template_name="main/register.html",
@@ -176,11 +176,35 @@ def experiment(request):
 
 def write_request(request):
 	if request.user.is_authenticated:
-		form = Write_content()
-		return render(request=request,
-						template_name="main/user_write.html",
-						context={"form":form}
-						)
+		if request.method == "POST":
+			form = Write_content(request.POST, request.FILES)
+			if form.is_valid():
+				obj = form.save(commit=False)
+				# Generating single slug
+				try:
+					series = "".join(filter(str.isalpha, map(lambda x: x[0], str(form.cleaned_data.get('series_title')).split(" ")))).upper()
+					title = form.cleaned_data.get('essay_title')
+					obj.essay_slug = series + "-" + "-".join(title.split(" ")[:4]).lower()
+					obj.save()
+					form.save(commit=True)
+					# current_series = EssaySeries.objects.get(series_title=obj.series_title)
+					messages.success(request, f"Content Written Successfully!")
+					# messages.error(request, f"{obj.essay_slug}")
+					return redirect("/"+obj.essay_slug)
+				except Exception as ex:
+					messages.error(request, f"Please feedback error{ex}")
+					return redirect("main:write_content")
+			else:
+				messages.error(request, f"Please Write Content!")
+
+				return render(request=request,
+								template_name="main/user_write.html",
+								context={"form": form})
+		form = Write_content
+		return render(request=request, 
+					template_name="main/user_write.html",
+					context={"form":form}
+					)
 	else:
 		messages.warning(request, f"For Community Login first!")
 		return redirect("main:login")
