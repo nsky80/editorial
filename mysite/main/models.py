@@ -42,6 +42,8 @@ class Essay(models.Model):
 
 	
 	series_title = models.ForeignKey(EssaySeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
+	category_title = models.ForeignKey(EssayCategory, verbose_name="Category", default=1, on_delete=models.SET_DEFAULT)
+	
 	essay_slug = models.CharField(max_length=50, default=1)
 	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
 
