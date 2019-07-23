@@ -27,13 +27,13 @@ class EssaySeriesAdmin(admin.ModelAdmin):
     inlines = [EssayInline]
 
 class EssayAdmin(admin.ModelAdmin):
-    list_display = ('essay_title', 'series_title', 'category_title','essay_published')   # displays the info in row
-    list_filter = ['series_title', 'category_title', 'essay_published']
+    list_display = ('essay_title', 'series_title', 'category_title', "essay_contributor", 'essay_published')   # displays the info in row
+    list_filter = ['series_title', 'category_title', 'essay_published', "essay_contributor",]
     # search_fields = ['essay_title', 'series_title']
     ordering = ['series_title']
 
     fieldsets = [
-        ("Title/date", {'fields': ["essay_title", "essay_published"]}),
+        ("Title/date", {'fields': ["essay_title", "essay_published", "essay_contributor",]}),
         ("Series/Slug", {'fields': ['category_title', "series_title", "essay_slug"]}),
         ("Content", {"fields": ["essay_image", "essay_content"]}),
     ]

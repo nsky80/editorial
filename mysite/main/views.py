@@ -189,7 +189,7 @@ def write_request(request):
 					current_series = EssaySeries.objects.get(series_title=obj.series_title)
 					current_category = EssayCategory.objects.get(category_title=current_series.category_title)
 					obj.category_title = current_category
-
+					obj.essay_contributor = request.user.username
 					obj.save()
 					form.save(commit=True)
 					# current_series = EssaySeries.objects.get(series_title=obj.series_title)

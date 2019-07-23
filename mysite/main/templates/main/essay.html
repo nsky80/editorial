@@ -1,6 +1,6 @@
 {% extends 'main/header.html' %}
     {% block title %}{{essay.essay_title}}{% endblock %}
-
+<!-- This page contains the perticular content -->
 {% block content %}
 
     <!-- Page Layout here -->
@@ -50,7 +50,11 @@
 			<br>
 			<div style="margin: 10px">
 				<h3><b>{{essay.essay_title}}</b></h3>
-				<p><b>{{essay.essay_published}}</b></p>
+
+				<div class="left"><b>{{essay.essay_published}}</b></div>
+				<div class="right"><b>Contributed By: {{essay.essay_contributor}}</b></div>
+				<br>
+				<!-- <p></p> -->
 				<hr>
 				<p>{{essay.essay_content|safe}}</p>
 			</div>
