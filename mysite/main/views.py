@@ -163,17 +163,6 @@ def account(request):
 	else:
 		return redirect("main:login")
 
-# this is used for testing for new features
-def experiment(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            pass  # does nothing, just trigger the validation
-    else:
-        form = ContactForm()
-    return render(request, 'main/experiment.html', {'form': form})
-
-
 def write_request(request):
 	if request.user.is_authenticated:
 		if request.method == "POST":
@@ -212,4 +201,17 @@ def write_request(request):
 					)
 	else:
 		messages.warning(request, f"For Community Login first!")
+		return redirect("main:login")
+
+# this is used for testing for new features
+def experiment(request):
+	if request.user.is_authenticated:
+		current_user = request.user.username
+		his_contents = Essay.objects.filter(essay_contributor=current_user)
+		return render(request = request,
+					  template_name='main/personal_content.html',
+					  context={'essays': his_contents}
+					  )
+	else:
+		messages.error(request, f"Login or Register First")
 		return redirect("main:login")

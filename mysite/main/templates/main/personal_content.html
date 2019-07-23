@@ -1,0 +1,46 @@
+{% extends 'main/header.html' %}
+{% block title %}Contents of {{user.username}}{% endblock %}
+<!-- This redirected from series -->
+{% block content %}
+{% load static %}
+<div class="container style="max-width:1500px; min-height:100%">
+{% if essays %}
+    <div class="row">
+        {% for es in essays %} 
+        <!-- size 6 on a large screen, 12 on a small, 6 on a med -->
+            <div class="col s12 m6 l6">
+                <a href="{{es.essay_slug}}" class="waves-effect waves-light" style="color:#000">
+                    <div class="card-panel hoverable" style="height:470px; background-color:#FFFFFF;">
+                        <div class="card-image">
+                            <img class="responsive-img" src="{{ es.essay_image.url }}" style="width:400px;height: 280px;">
+                            <br><span class="card-title"><h6><b>{{es.essay_title}}</b></h6></span>
+                        </div>
+                        <div class="card-content">
+                            <p>{{es.essay_content | truncatechars_html:100|safe}}</p>
+                        </div>
+                        <div class="card-action right-align">
+                            <a href="{{es.essay_slug}}" class="waves-effect waves-yellow btn tooltipped btn" data-position="bottom" data-tooltip="Continue Reading" style="color: white; background-color:light blue"><b>Read More..</b></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="center-align">
+        <a href="/write_content" class="waves-effect waves-red btn pulse" d><i class="material-icons left">plus_one</i><b>Contribute More!</b></a>
+    </div>
+{% else %}
+
+    <div class = "center-align">
+      <h2><b>You have not Contributed yet!</b></h2>
+      <img class="responsive-img" style="width: 40%;height: 40%;" src="{% static 'main/images/sad_emoji.png'%}">
+      <br>
+      <br>
+      <a href="/write_content" class="waves-effect waves-red btn  pulse"><b>Contribute now!</b></a>
+      </div>
+    {% endif %}
+</div>
+<br>
+{% endblock %}
+
