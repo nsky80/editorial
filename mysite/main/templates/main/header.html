@@ -16,9 +16,14 @@
 
 </head>
 <body style="background-color: #eeeeee ;">
-	{% include 'main/includes/navbar.html' %}
+  {% if request.path == '/account'  or request.path == '/network' or request.path == '/setting'%}
+    {% include 'main/includes/profile_navbar.html' %}
+  {% else %}
+    {% include 'main/includes/navbar.html' %}
+  {% endif %}
 	{% include 'main/includes/fixed_action_button.html' %}
   {% include 'main/includes/messaging.html' %}
+
 	{% block content %}
 	{% endblock %}
   {% include 'main/includes/footer.html' %}

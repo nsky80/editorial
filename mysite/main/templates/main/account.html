@@ -1,13 +1,24 @@
-{% extends 'main/header.html' %}
-    {% block title %}Account | Profile and Stuff{% endblock %}
+    {% extends 'main/header.html' %}
+    {% block title %} {{user.username}}'s Profile {% endblock %}
 
     {% block content %}
-		<center><h1>Account</h1></center>
-		<center><h4>Thund Rakh Kake!</h4></center>
-        <div class="container">
-		
-            {% load static %}
-            <img class="responsive-img" src="{% static 'main/images/under_construction.jpg' %}">
 
+
+    <main>
+        <div class="container">
+            <h1 class="center">	<center><h1><b>Welcome {{user.username}}!</b></h1></center></h1>
+            <p class="flow-text">Don't forget to hit the like button if you found this useful.</p>
+            <p>
+                On an ultra wide screen (21:9), you may want to have the second sidebar of a dual sidebar setup in Materialize become visible automatically. This method will allow you to do that. The second sidebar behaves like a mobile sidebar until the window is wide enough that it could obviously safely accomodate it in it's fixed state. The class <strong>.sidebar-fixed</strong> is added via Javascript.
+            </p>     
+                
+            <p>
+                To see this in action resize your window on a very wide screeen. (The breakpoint is set for 1925px).
+            </p>
+            <!-- <p class="center">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/BDlhSNAuHw8?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </p> -->
         </div>
-    {% endblock %}
+    </main>
+    
+ {% endblock %}

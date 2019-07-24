@@ -1,0 +1,31 @@
+{% extends 'main/header.html' %}
+{% block title %} {{user.username}}'s Network {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<main>
+    <div class="container">
+        <h1 class="center">	<center><h1><b>{{user.username}}'s Network</b></h1></center></h1>
+        <p><b>Here is some more information about your Starred Users</b></p>
+        
+        <ul class="collection">
+            {% for u in users %}
+                <li class="collection-item avatar">
+                    <img src="{% static 'main/images/back1.jpg' %}" alt="" class="circle">
+                    <span class="title">{{u}}</span>
+                    <p>First Line <br>
+                        Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- <p class="center">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/BDlhSNAuHw8?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </p> -->
+        <br>
+    </div>
+</main>
+
+{% endblock %}

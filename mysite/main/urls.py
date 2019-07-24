@@ -14,7 +14,8 @@ urlpatterns = [
 	path('account', views.account, name="account"),
 	path('experiment', views.experiment, name="experiment"),
 	path('write_content', views.write_request, name="write_content"),
-	path('personal_content', views.experiment, name="personal_content"),
+	path('network', views.network, name="network"),
+	path('personal_content', views.personal_content, name="personal_content"),
 	path('<single_slug>', views.single_slug, name="single_slug"),
 ]
 

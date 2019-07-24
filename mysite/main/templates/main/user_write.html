@@ -2,20 +2,23 @@
 
 {% block content %}
 {{ form.media }}
-    <div class="container hoverable" style="background-color: #ffffff">
-        <div style="margin: 20px; padding-top: 12px;padding-bottom: 15px;">
-            <form method="post" action='' enctype="multipart/form-data">
+    <div class="container ">
+    <h2 class="header">Write a New Content Here!</h2>
+        <div class="hoverable" style="background-color: #ffffff">
+            <div style="margin: 20px; padding-top: 12px;padding-bottom: 15px;">
+                <form method="post" action='' enctype="multipart/form-data">
 
-                    {% csrf_token %}
-                    {{ form.as_p}}
+                        {% csrf_token %}
+                        {{ form.as_p}}
 
-                    <div style="padding-top: 20px;padding-bottom:20px;">
-                    <button class="btn waves-effect waves-light" type="submit" name="action"><b>Submit
-                            </b>><i class="material-icons right">send</i>
-                    </button>
-                    </div>
-            </form>
+                        <div style="padding-top: 20px;padding-bottom:20px;">
+                        <button class="btn waves-effect waves-light" type="submit" name="action"><b>Submit
+                                </b>><i class="material-icons right">send</i>
+                        </button>
+                        </div>
+                </form>
 
+            </div>
         </div>
     </div>
 {% endblock %}

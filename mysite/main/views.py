@@ -157,11 +157,14 @@ def community(request):
 				 
 def account(request):
 	if request.user.is_authenticated:
+		user = User.objects.get(username=request.user.username)
 		return render(request=request, 
 				  template_name="main/account.html",
+				  context={"user":user},
 				 )
 	else:
 		return redirect("main:login")
+
 
 def write_request(request):
 	if request.user.is_authenticated:
@@ -204,7 +207,7 @@ def write_request(request):
 		return redirect("main:login")
 
 # this is used for testing for new features
-def experiment(request):
+def personal_content(request):
 	if request.user.is_authenticated:
 		current_user = request.user.username
 		his_contents = Essay.objects.filter(essay_contributor=current_user)
@@ -214,4 +217,36 @@ def experiment(request):
 					  )
 	else:
 		messages.error(request, f"Login or Register First")
+		return redirect("main:login")
+
+
+
+def network(request):
+	if request.user.is_authenticated:
+		user = User.objects.get(username=request.user.username)
+		active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+		user_id_list = []
+		for session in active_sessions:
+			data = session.get_decoded()
+			user_id_list.append(data.get('_auth_user_id', None))
+		# Query all logged in users based on id list
+		users =  User.objects.filter(id__in=user_id_list)
+		return render(request=request, 
+				  template_name="main/network.html",
+				  context={"user":user, "users": users},		# this is temporary and uses online users
+				 )
+	else:
+		messages.error(request, f"Who are you? Login or Register first!")
+		return redirect("main:login")
+
+
+def experiment(request):
+	if request.user.is_authenticated:
+		user = User.objects.get(username=request.user.username)
+		
+		return render(request=request, 
+				  template_name="main/experiment.html",
+				  context={"user":user},
+				 )
+	else:
 		return redirect("main:login")
