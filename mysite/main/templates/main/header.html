@@ -36,10 +36,13 @@
   {% endif %}
 	{% include 'main/includes/fixed_action_button.html' %}
   {% include 'main/includes/messaging.html' %}
+
   <main>
 	{% block content %}
   {% endblock %}
 </main>
+  {% block account %}
+  {% endblock %}
   {% include 'main/includes/footer.html' %}
   <script type="text/javascript">M.AutoInit();</script>
 </body>
