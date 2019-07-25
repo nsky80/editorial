@@ -2,6 +2,8 @@ from django import forms
 from .models import EssaySeries, Essay
 # from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
 
 
 class TinyMCEWidget(TinyMCE):
@@ -17,11 +19,21 @@ class Write_content(forms.ModelForm):
             attrs={'required': False, 'cols': 30, 'rows': 10}
         )
     )
-
     class Meta:
         model = Essay
         fields = ['essay_title', 'essay_published', 'series_title', 'essay_image', 'essay_content',] # or whatever fields you want ('field_a', )
 
+
+class EditProfileForm(UserChangeForm):
+     class Meta:
+         model = User
+         fields = (
+             'username',
+             'email',
+             'first_name',
+             'last_name',
+         )
+        #  exclude = ()
 
 
 class ContactForm(forms.Form):

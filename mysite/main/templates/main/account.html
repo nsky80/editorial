@@ -2,23 +2,21 @@
     {% block title %} {{user.username}}'s Profile {% endblock %}
 
     {% block content %}
-
-
     <main>
-        <div class="container">
-            <h1 class="center">	<center><h1><b>Welcome {{user.username}}!</b></h1></center></h1>
-            <p class="flow-text">Don't forget to hit the like button if you found this useful.</p>
-            <p>
-                On an ultra wide screen (21:9), you may want to have the second sidebar of a dual sidebar setup in Materialize become visible automatically. This method will allow you to do that. The second sidebar behaves like a mobile sidebar until the window is wide enough that it could obviously safely accomodate it in it's fixed state. The class <strong>.sidebar-fixed</strong> is added via Javascript.
-            </p>     
-                
-            <p>
-                To see this in action resize your window on a very wide screeen. (The breakpoint is set for 1925px).
-            </p>
-            <!-- <p class="center">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/BDlhSNAuHw8?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </p> -->
+        <h1 class="center" style="margin-top: -10px;">	<center><h1><b>Welcome {{user.username}}!</b></h1></center></h1>
+        <div class="container hoverable" style="padding: 20px; background-color: white; margin-top: 10px;">
+            
+        <!-- <ul class="collection with-header"> -->
+        <ul class="collection">
+            <!-- <li class="collection-header"><h4>First Names</h4></li> -->
+            <li class="collection-item"><h6><b>Username&nbsp;&nbsp;: </b>{{user.username}}</h6></li>
+            <li class="collection-item"><h6><b>FirstName&nbsp;&nbsp;: </b>{{user.first_name}}</h6></li>
+            <li class="collection-item"><h6><b>LastName&nbsp;&nbsp;: </b>{{user.last_name}}</h6></li>
+            <li class="collection-item"><h6><b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </b>{{user.email}}</h6></li>
+        </ul>
+        <div class="center-align">
+                <a href="/account/edit_profile" class="waves-effect red waves-yellow btn pulse" d><i class="material-icons left">edit</i><b>Edit Details</b></a>
         </div>
     </main>
-    
+    <br>
  {% endblock %}

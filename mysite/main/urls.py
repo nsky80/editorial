@@ -16,6 +16,7 @@ urlpatterns = [
 	path('write_content', views.write_request, name="write_content"),
 	path('network', views.network, name="network"),
 	path('personal_content', views.personal_content, name="personal_content"),
+	path('account/edit_profile/', views.edit_profile, name="edit_profile"),
 	path('<single_slug>', views.single_slug, name="single_slug"),
 ]
 

@@ -56,10 +56,12 @@
                 <a href="#!email"><span class="white-text email">satishkumary80@gmail.com</span></a>
             </div>
         </li>
-            <li><a href="/account"><i class="material-icons">account_box</i>Account</a></li>
-            <li><a href="/network"><i class="material-icons">people_outline</i>Network<span class="new badge">1</span></a></li>
-            <li><a href="/setting"><i class="material-icons">settings_applications</i>Setting</a></li>
-            <li><a href="/personal_content"><i class="material-icons">view_module</i>Your Contents</a></li>
+            <li {% if request.get_full_path == '/account' %}class="active"{% endif %}><a href="/account"><i class="material-icons">account_box</i>Account</a></li>
+            <li {% if request.get_full_path == '/network' %}class="active"{% endif %}><a href="/network"><i class="material-icons">people_outline</i>Network<span class="new badge">1</span></a></li>
+            <li {% if request.get_full_path == '/account/edit_profile/' %}class="active"{% endif %}><a href="/account/edit_profile"><i class="material-icons">settings_applications</i>Setting</a></li>
+            <li {% if request.get_full_path == '/personal_content' %}class="active"{% endif %}><a href="/personal_content"><i class="material-icons">view_module</i>Your Contents</a></li>
+            <li><a href="/logout" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">group_work</i>Logout</a></li>
+     
        </ul>
             
             <!-- <ul class="sidenav" id="mobile-demo">

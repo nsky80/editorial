@@ -13,10 +13,21 @@
     <!-- Configurations of tinymce app -->
     <script src="{% static 'tinymce/js/prism.js' %}"></script>
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
+    <style>   
+    /* Sticky Footer */
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
 
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
 </head>
 <body style="background-color: #eeeeee ;">
-  {% if request.path == '/account'  or request.path == '/network' or request.path == '/setting'%}
+  {% if request.path == '/account'  or request.path == '/network' or request.path == '/account/edit_profile/'%}
     {% include 'main/includes/profile_navbar.html' %}
   {% else %}
     {% include 'main/includes/navbar.html' %}

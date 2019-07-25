@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Essay, EssaySeries, EssayCategory
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User		# for community tab purpose
 from django.contrib.sessions.models import Session
 from django.utils import timezone
-from .forms import Write_content, ContactForm
+from .forms import Write_content, EditProfileForm, ContactForm
 
 
 def single_slug(request, single_slug):
@@ -55,18 +55,18 @@ def single_slug(request, single_slug):
 				template_name='main/under_construction.html',
 				context={"pagename":single_slug}
 				)
-		# For testing Purpose
-		# matching_essay = list(map(lambda x: x.essay_title, matching_essay))  
-		# for i in EssaySeries.objects.all():
-		# 	if i.series_slug == single_slug:
-		# 		matching_series = i.series_title
-		# 		break
-		# matching_essays_slug = []
-		# for e in Essay.objects.all():
-		# 	if e.series_title.series_title == matching_series:
-		# 		matching_essays_slug.append(e.essay_slug)
-		# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
-	
+	# For testing Purpose
+	# matching_essay = list(map(lambda x: x.essay_title, matching_essay))  
+	# for i in EssaySeries.objects.all():
+	# 	if i.series_slug == single_slug:
+	# 		matching_series = i.series_title
+	# 		break
+	# matching_essays_slug = []
+	# for e in Essay.objects.all():
+	# 	if e.series_title.series_title == matching_series:
+	# 		matching_essays_slug.append(e.essay_slug)
+	# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
+
 
 def homepage(request):
 	return render(request=request, 
@@ -157,7 +157,7 @@ def community(request):
 				 
 def account(request):
 	if request.user.is_authenticated:
-		user = User.objects.get(username=request.user.username)
+		user = request.user
 		return render(request=request, 
 				  template_name="main/account.html",
 				  context={"user":user},
@@ -206,7 +206,7 @@ def write_request(request):
 		messages.warning(request, f"For Community Login first!")
 		return redirect("main:login")
 
-# this is used for testing for new features
+
 def personal_content(request):
 	if request.user.is_authenticated:
 		current_user = request.user.username
@@ -218,7 +218,6 @@ def personal_content(request):
 	else:
 		messages.error(request, f"Login or Register First")
 		return redirect("main:login")
-
 
 
 def network(request):
@@ -240,6 +239,25 @@ def network(request):
 		return redirect("main:login")
 
 
+def edit_profile(request):
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			form = EditProfileForm(request.POST, instance=request.user)
+
+			if form.is_valid():
+				form.save()
+				return redirect("/account")
+		else:
+			form = EditProfileForm(instance=request.user)
+			args = {'form': form}
+			return render(request=request,
+						  template_name="main/edit_user_profile.html",
+						  context=args)
+	else:
+		return HttpResponseNotFound()         
+
+
+# this field is used for testing new features
 def experiment(request):
 	if request.user.is_authenticated:
 		user = User.objects.get(username=request.user.username)
