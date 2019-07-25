@@ -68,6 +68,12 @@ def single_slug(request, single_slug):
 	# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
 
 
+def index(request):
+	return render(request=request, 
+				  template_name="main/index.html",
+				 )			 
+				
+
 def homepage(request):
 	return render(request=request, 
 				  template_name="main/home.html",
@@ -78,7 +84,7 @@ def homepage(request):
 def logout_request(request):
 	logout(request)
 	messages.info(request, "Logged out successfully!")
-	return redirect("main:homepage")
+	return redirect("main:index")
 	
 	
 def login_request(request):
@@ -245,8 +251,18 @@ def edit_profile(request):
 			form = EditProfileForm(request.POST, instance=request.user)
 
 			if form.is_valid():
-				form.save()
-				return redirect("/account")
+				try:
+					# check whether username change or not
+					old_username = request.user.username
+					new_username = form.cleaned_data.get('username')
+					if old_username != new_username:
+						users_essays = Essay.objects.filter(essay_contributor=old_username)
+						for ch in users_essays:
+							ch.essay_contributor = new_username
+					form.save()
+					return redirect("/account")
+				except Exception as ex:
+					messages.error(request, f"Please Feedback error {ex}")
 		else:
 			form = EditProfileForm(instance=request.user)
 			args = {'form': form}
@@ -259,12 +275,12 @@ def edit_profile(request):
 
 # this field is used for testing new features
 def experiment(request):
-	if request.user.is_authenticated:
-		user = User.objects.get(username=request.user.username)
+	# if request.user.is_authenticated:
+	# 	user = User.objects.get(username=request.user.username)
 		
-		return render(request=request, 
-				  template_name="main/experiment.html",
-				  context={"user":user},
-				 )
-	else:
-		return redirect("main:login")
+	return render(request=request, 
+				template_name="main/experiment.html",
+				# context={"user":user},
+				)
+	# else:
+	# 	return redirect("main:login")

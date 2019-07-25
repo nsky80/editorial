@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>  
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
     <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet"/>
@@ -14,16 +16,16 @@
     <script src="{% static 'tinymce/js/prism.js' %}"></script>
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
     <style>   
-    /* Sticky Footer */
+/* Flexible footer */
       body {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-      }
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+        }
 
-      main {
-        flex: 1 0 auto;
-      }
+        main {
+          flex: 1 0 auto;
+        }
     </style>
 </head>
 <body style="background-color: #eeeeee ;">
@@ -34,9 +36,10 @@
   {% endif %}
 	{% include 'main/includes/fixed_action_button.html' %}
   {% include 'main/includes/messaging.html' %}
-
+  <main>
 	{% block content %}
-	{% endblock %}
+  {% endblock %}
+</main>
   {% include 'main/includes/footer.html' %}
   <script type="text/javascript">M.AutoInit();</script>
 </body>

@@ -7,7 +7,7 @@
 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li {% if request.get_full_path == '/' %}class="active"{% endif %}><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                <li {% if request.get_full_path == '/' or request.get_full_path == '/home' %}class="active"{% endif %}><a href="/home"><i class="material-icons left">home</i>Home</a></li>
                 <li {% if request.get_full_path == '/community' %}class="active"{% endif %}><a href="/community"><i class="material-icons left">people</i>Community</a></li>
                 {% if user.is_authenticated %}
                     <li class="tooltipped {% if request.get_full_path == '/write_content' %}active{% endif %}" data-position="down" data-tooltip="Contribute"><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
@@ -38,7 +38,7 @@
 </div>
 
     <ul class="sidenav" id="mobile-demo">
-        <li {% if request.get_full_path == '/' %}class="active"{% endif %}><a href="/"><i class="material-icons left">home</i>Home</a></li>
+        <li {% if request.get_full_path == '/' or request.get_full_path == '/home' %}class="active"{% endif %}><a href="/home"><i class="material-icons left">home</i>Home</a></li>
         <li {% if request.get_full_path == '/community' %}class="active"{% endif %}><a href="/community"><i class="material-icons left">people</i>Community</a></li>
         {% if user.is_authenticated %}
             <li {% if request.get_full_path == '/write_content' %}class="active"{% endif %}><a href="/write_content"><i class="material-icons left">add</i>Contribute</a></li>
