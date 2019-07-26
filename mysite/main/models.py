@@ -3,6 +3,7 @@ from django.utils import timezone
 # delete image too when object were deleted
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.conf import settings
 # Create your models here.
 
 
@@ -39,7 +40,8 @@ class Essay(models.Model):
 	essay_title = models.CharField(max_length=100)
 	essay_published = models.DateTimeField("Date Published", default=timezone.now)
 	essay_content = models.TextField(help_text='Write here your message!')
-	essay_contributor = models.CharField("Contributor", max_length=50, default="Admin")
+	essay_contributor = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.SET_DEFAULT)
+	# essay_contributor = models.CharField("Contributor", max_length=50, default="Admin")
 	
 	series_title = models.ForeignKey(EssaySeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
 	category_title = models.ForeignKey(EssayCategory, verbose_name="Category", default=1, on_delete=models.SET_DEFAULT)

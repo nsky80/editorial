@@ -187,7 +187,7 @@ def write_request(request):
 					current_series = EssaySeries.objects.get(series_title=obj.series_title)
 					current_category = EssayCategory.objects.get(category_title=current_series.category_title)
 					obj.category_title = current_category
-					obj.essay_contributor = request.user.username
+					obj.essay_contributor = request.user
 					obj.save()
 					form.save(commit=True)
 					# current_series = EssaySeries.objects.get(series_title=obj.series_title)
@@ -215,7 +215,7 @@ def write_request(request):
 
 def personal_content(request):
 	if request.user.is_authenticated:
-		current_user = request.user.username
+		current_user = request.user
 		his_contents = Essay.objects.filter(essay_contributor=current_user)
 		return render(request = request,
 					  template_name='main/personal_content.html',
@@ -252,13 +252,6 @@ def edit_profile(request):
 
 			if form.is_valid():
 				try:
-					# check whether username change or not
-					old_username = request.user.username
-					new_username = form.cleaned_data.get('username')
-					if old_username != new_username:
-						users_essays = Essay.objects.filter(essay_contributor=old_username)
-						for ch in users_essays:
-							ch.essay_contributor = new_username
 					form.save()
 					return redirect("/account")
 				except Exception as ex:
