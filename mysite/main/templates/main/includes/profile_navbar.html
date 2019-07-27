@@ -53,9 +53,10 @@
                 </div>
                 <a href="#!user"><img class="circle" src="{% static 'main/images/sample-1.jpg' %}"></a>
                 <a href="#!name"><span class="black-text name"><b>{{user.username}}</b></span></a>
-                <a href="#!email"><span class="white-text email">satishkumary80@gmail.com</span></a>
+                <a href="#!email"><span class="white-text email">{{user.email}}</span></a>
             </div>
         </li>
+            <li><a href="/home"><i class="material-icons left">home</i>Home</a></li> 
             <li {% if request.get_full_path == '/account' %}class="active"{% endif %}><a href="/account"><i class="material-icons">account_box</i>Account</a></li>
             <li {% if request.get_full_path == '/network' %}class="active"{% endif %}><a href="/network"><i class="material-icons">people_outline</i>Network<span class="new badge">1</span></a></li>
             <li {% if request.get_full_path == '/account/edit_profile/' %}class="active"{% endif %}><a href="/account/edit_profile"><i class="material-icons">settings_applications</i>Setting</a></li>
