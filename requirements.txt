@@ -1,11 +1,14 @@
-1. Python 3.6.5
-2. django version-2.1.5:
-3. Materialize css(included)
-4. Materialize javascript(included)
+1. Django==2.2.3
+2. django-tinymce4-lite==1.7.5
+3. jsmin==2.2.2
+4. Pillow==6.1.0
+5. pytz==2019.1
+6. sqlparse==0.3.0
+8. Materialize css(included)
+9. Materialize javascript(included)
       -ref: https://materializecss.com/getting-started.html
-5. Google API of icons
+10. Google API of icons
       -ref: https://fonts.googleapis.com/icon?family=Material+Icons
-6. Google API of fonts
+11. Google API of fonts
       -ref: https://fonts.googleapis.com/css?family=Raleway
-7. Admin Editor django-tinymce4-lite.
-8. Pillow for handelling images.
+
