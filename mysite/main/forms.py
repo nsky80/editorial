@@ -1,5 +1,5 @@
 from django import forms 
-from .models import EssaySeries, Essay
+from .models import EssaySeries, Essay, Feedback
 # from django.contrib.flatpages.models import FlatPage
 from tinymce.widgets import TinyMCE
 from django.contrib.auth.forms import UserChangeForm
@@ -34,6 +34,14 @@ class EditProfileForm(UserChangeForm):
              'last_name',
          )
         #  exclude = ()
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        if User.is_authenticated:
+            fields = ('feedback_title', 'feedback_content')
+        else:
+            fields = ('feedback_title', 'feedback_user_id', 'feedback_content')
 
 
 class ContactForm(forms.Form):

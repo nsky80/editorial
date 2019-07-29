@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User		# for community tab purpose
 from django.contrib.sessions.models import Session
 from django.utils import timezone
-from .forms import Write_content, EditProfileForm, ContactForm
+from .forms import Write_content, EditProfileForm, ContactForm, FeedbackForm
 
 
 def single_slug(request, single_slug):
@@ -209,7 +209,7 @@ def write_request(request):
 					context={"form":form}
 					)
 	else:
-		messages.warning(request, f"For Community Login first!")
+		messages.warning(request, f"For Writing Own Content Login First!")
 		return redirect("main:login")
 
 
@@ -264,6 +264,28 @@ def edit_profile(request):
 						  context=args)
 	else:
 		return HttpResponseNotFound()         
+
+
+def feedback(request):
+	if request.method == "POST":
+		form = FeedbackForm(request.POST, request.FILES)
+		if form.is_valid():
+			obj = form.save()
+			if request.user.is_authenticated:
+				obj.feedback_user_id = request.user.username
+			obj.save()
+			messages.success(request, f"Feedback sent successfully!")
+			return redirect("/home")
+		else:
+			messages.error(request, f"Please Write Content!")
+			return render(request=request,
+							template_name="main/feedback.html",
+							context={"form": form})
+	form = FeedbackForm
+	return render(request=request, 
+				template_name="main/feedback.html",
+				context={"form":form}
+				)
 
 
 # this field is used for testing new features

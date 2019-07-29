@@ -59,8 +59,8 @@ def submission_delete(sender, instance, **kwargs):
 	instance.essay_image.delete(False) 
   
 
-# # for deleting images too whenever a object has been deleted
-# @receiver(post_delete, sender=EssayCategory)
-# def submission_delete(sender, instance, **kwargs):
-# 	instance.category_image.delete(False) 
-  
+class Feedback(models.Model):
+	feedback_title = models.CharField(max_length=100)
+	feedback_date = models.DateTimeField("Feedback Time", default=timezone.now)
+	feedback_content = models.TextField(help_text="Share Your Ideas Here!")
+	feedback_user_id = models.EmailField()

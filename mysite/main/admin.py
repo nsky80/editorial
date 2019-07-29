@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Essay, EssaySeries, EssayCategory
+from .models import Essay, EssaySeries, EssayCategory, Feedback
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -42,7 +42,20 @@ class EssayAdmin(admin.ModelAdmin):
         models.TextField: {'widget': TinyMCE()},
         }
 
+
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('feedback_title', 'feedback_user_id', 'feedback_date')   # displays the info in row
+    list_filter = ['feedback_user_id', 'feedback_date']
+    # search_fields = ['essay_title', 'series_title']
+    ordering = ['feedback_date']
+
+    fieldsets = [
+        ("Title/date", {'fields': ["feedback_title", "feedback_date", "feedback_user_id",]}),
+        ("Content", {'fields': ['feedback_content']}),
+    ]
+
 # Register your models here.
 admin.site.register(Essay, EssayAdmin)    # this overrides default by above cofig
 admin.site.register(EssaySeries, EssaySeriesAdmin)
 admin.site.register(EssayCategory, EssayCategoryAdmin)
+admin.site.register(Feedback, FeedbackAdmin)
