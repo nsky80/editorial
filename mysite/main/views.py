@@ -270,10 +270,7 @@ def feedback(request):
 	if request.method == "POST":
 		form = FeedbackForm(request.POST, request.FILES)
 		if form.is_valid():
-			obj = form.save()
-			if request.user.is_authenticated:
-				obj.feedback_user_id = request.user.username
-			obj.save()
+			form.save(commit=True)
 			messages.success(request, f"Feedback sent successfully!")
 			return redirect("/home")
 		else:

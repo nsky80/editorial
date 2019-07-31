@@ -38,10 +38,7 @@ class EditProfileForm(UserChangeForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        if User.is_authenticated:
-            fields = ('feedback_title', 'feedback_content')
-        else:
-            fields = ('feedback_title', 'feedback_user_id', 'feedback_content')
+        fields = ('feedback_title', 'feedback_user_id', 'feedback_content')
 
 
 class ContactForm(forms.Form):
