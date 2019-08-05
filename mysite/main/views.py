@@ -50,7 +50,7 @@ def single_slug(request, single_slug):
 								   })
 
 	# If slug doesn't exist anywhere then
-	messages.warning(request, "Kaha Chal Diye Guru!!????")
+	messages.warning(request, "Kahaa!!????")
 	return render(request=request,
 				template_name='main/under_construction.html',
 				context={"pagename":single_slug}
@@ -296,3 +296,9 @@ def experiment(request):
 				)
 	# else:
 	# 	return redirect("main:login")
+
+
+def explore(request):
+	return render(request=request,
+				template_name="main/explore.html",
+				context={"essays": Essay.objects.all()})

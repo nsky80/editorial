@@ -1,0 +1,50 @@
+{% extends 'main/header.html' %}
+{% block title %}Explore | Recently Updated Content{% endblock %}
+
+
+{% block content %}
+
+<div class="container style="max-width:1500px; min-height:100%">
+
+    <!-- <nav class="brown darken-1"> -->
+            <!-- <div class="nav-wrapper"> -->
+              <!-- <div class="col s12" style="font-size: 130%;">
+                <a href="javascript:history.go(-2);" class="tooltipped" data-position="bottom" data-tooltip="Go to Categories">&nbsp;<b>All Category&nbsp; ></b></a>
+                <a href="javascript:history.go(-1);" class="tooltipped" data-position="bottom" data-tooltip="Go to {{series.category_title}} Category"><b>&nbsp;&nbsp;{{series.category_title}}&nbsp; ></b></a>
+                <a href="javascript:history.go(0);" class="tooltipped" data-position="bottom" data-tooltip="Continue to {{series.series_title}}"><b>&nbsp;&nbsp;{{series.series_title}}</b></a>
+              </div> -->
+            <!-- </div> -->
+    <!-- </nav> -->
+
+<div class="row"></div>
+{% for es in essays %} 
+    <div class="col s12 m6 l6">
+        <a href="{{es.essay_slug}}" class="waves-effect waves-light" style="color:#000">
+            <div class="card-panel hoverable" style="height:300px; background-color:#FFFFFF; padding-top: 10px;">
+                           
+                <h6 class="header" ><b>{{es.essay_title}}</b></h6>
+                <div class="card horizontal" style="height:230px;">
+                <div class="card-image">
+                        <img class="responsive-img" src="{{ es.essay_image.url }}" style="width:550px;height: 230px;padding: 10px;">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                            <p>{{es.essay_content | truncatechars_html:100|safe}}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{es.essay_slug}}" class="waves-effect waves-yellow btn tooltipped btn" data-position="bottom" data-tooltip="Continue Reading" style="color: white; background-color:light blue"><b>Read More..</b></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+</div>
+{% endblock %}
+

@@ -48,6 +48,8 @@ class Essay(models.Model):
 	
 	essay_slug = models.CharField(max_length=50, default=1)
 	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
+	# new field added
+	essay_summary = models.CharField(max_length=150, help_text="Write summary here!", null=True, blank=True)
 
 	def __str__(self):
 		return self.essay_title

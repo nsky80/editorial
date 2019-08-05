@@ -19,6 +19,7 @@ urlpatterns = [
 	path('personal_content', views.personal_content, name="personal_content"),
 	path('account/edit_profile/', views.edit_profile, name="edit_profile"),
 	path('feedback', views.feedback, name="feedback"),
+	path('explore', views.explore, name="explore"),
 	path('<single_slug>', views.single_slug, name="single_slug"),
 ]
 
