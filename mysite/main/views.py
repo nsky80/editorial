@@ -69,7 +69,13 @@ def single_slug(request, single_slug):
 
 
 def index(request):
-	return render(request=request, 
+	# if user logged in no need to show intro page
+	if request.user.is_authenticated:
+		return render(request=request,
+					template_name="main/explore.html",
+					context={"essays": Essay.objects.all})
+	else:
+		return render(request=request, 
 				  template_name="main/index.html",
 				 )			 
 				
@@ -301,4 +307,4 @@ def experiment(request):
 def explore(request):
 	return render(request=request,
 				template_name="main/explore.html",
-				context={"essays": Essay.objects.all()})
+				context={"essays": Essay.objects.all})
