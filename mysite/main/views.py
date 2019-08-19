@@ -73,7 +73,7 @@ def index(request):
 	if request.user.is_authenticated:
 		return render(request=request,
 					template_name="main/explore.html",
-					context={"essays": Essay.objects.all})
+					context={"essays": Essay.objects.order_by('-essay_published')})
 	else:
 		return render(request=request, 
 				  template_name="main/index.html",
@@ -307,4 +307,4 @@ def experiment(request):
 def explore(request):
 	return render(request=request,
 				template_name="main/explore.html",
-				context={"essays": Essay.objects.all})
+				context={"essays": Essay.objects.order_by('-essay_published')})

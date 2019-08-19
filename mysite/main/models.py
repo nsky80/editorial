@@ -37,9 +37,9 @@ class EssaySeries(models.Model):
 		
 		
 class Essay(models.Model):
-	essay_title = models.CharField(max_length=100)
+	essay_title = models.CharField("Content Title", max_length=100)
 	essay_published = models.DateTimeField("Date Published", default=timezone.now)
-	essay_content = models.TextField(help_text='Write here your message!')
+	essay_content = models.TextField("Main Content", help_text='Write here your message!')
 	essay_contributor = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.SET_DEFAULT)
 	# essay_contributor = models.CharField("Contributor", max_length=50, default="Admin")
 	
@@ -47,9 +47,9 @@ class Essay(models.Model):
 	category_title = models.ForeignKey(EssayCategory, verbose_name="Category", default=1, on_delete=models.SET_DEFAULT)
 	
 	essay_slug = models.CharField(max_length=50, default=1)
-	essay_image = models.ImageField(upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
+	essay_image = models.ImageField("Display Image(Optional)", upload_to="images/essay/", default="images/sample-1.jpg", blank=True, null=True)
 	# new field added
-	essay_summary = models.CharField(max_length=150, help_text="Write summary here!", null=True, blank=True)
+	essay_summary = models.CharField("Content Summary(About)", max_length=150, help_text="Write summary here!(Optional)", null=True, blank=True)
 
 	def __str__(self):
 		return self.essay_title

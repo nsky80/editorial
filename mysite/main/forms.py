@@ -14,14 +14,14 @@ class TinyMCEWidget(TinyMCE):
 
 class Write_content(forms.ModelForm):
     # essay_published = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
-    essay_content = forms.CharField(
+    essay_content = forms.CharField(label="Main Content", 
         widget=TinyMCEWidget(
             attrs={'required': False, 'cols': 30, 'rows': 10}
         )
     )
     class Meta:
         model = Essay
-        fields = ['essay_title', 'essay_published', 'series_title', 'essay_image', 'essay_content',] # or whatever fields you want ('field_a', )
+        fields = ['essay_title', 'essay_published', 'series_title', 'essay_image', 'essay_summary', 'essay_content',] # or whatever fields you want ('field_a', )
 
 
 class EditProfileForm(UserChangeForm):
