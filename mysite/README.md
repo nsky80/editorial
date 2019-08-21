@@ -1,0 +1,2 @@
+- Here `main` is the name of django application
+- `mysite` is name of project and it contains project configurations.
