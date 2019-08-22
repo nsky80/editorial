@@ -6,12 +6,13 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 
 
+# TinyMCE editer for writing new content used both end User and Admin
 class TinyMCEWidget(TinyMCE):
     def use_required_attribute(self, *args):
         return False
 
 
-
+# This is form for writing new content by user
 class Write_content(forms.ModelForm):
     # essay_published = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
     essay_content = forms.CharField(label="Main Content", 
@@ -24,6 +25,7 @@ class Write_content(forms.ModelForm):
         fields = ['essay_title', 'essay_published', 'series_title', 'essay_image', 'essay_summary', 'essay_content',] # or whatever fields you want ('field_a', )
 
 
+# User can modify his information and it allows only what user can modify
 class EditProfileForm(UserChangeForm):
      class Meta:
          model = User
@@ -35,12 +37,15 @@ class EditProfileForm(UserChangeForm):
          )
         #  exclude = ()
 
+
+# This is feedback form which is open to all but id required
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ('feedback_title', 'feedback_user_id', 'feedback_content')
 
 
+# This class is added only for testing purposes it will remove soon!
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=254)

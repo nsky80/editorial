@@ -10,6 +10,7 @@ from django.utils import timezone
 from .forms import Write_content, EditProfileForm, ContactForm, FeedbackForm
 
 
+# It handles all URLs which is not defined in urls.py file in app
 def single_slug(request, single_slug):
 	# First we search any url in category and then series after that main content
 	categories = [c.category_slug for c in EssayCategory.objects.all()]
@@ -68,6 +69,7 @@ def single_slug(request, single_slug):
 	# return HttpResponse("Series Hai: " + str(matching_essay) + str(essay_urls))
 
 
+# This is first  page which prompt as website opened
 def index(request):
 	# if user logged in no need to show intro page
 	if request.user.is_authenticated:
@@ -75,6 +77,7 @@ def index(request):
 					template_name="main/explore.html",
 					context={"essays": Essay.objects.order_by('-essay_published')})
 	else:
+		# For unauthorized and new user it will open index
 		return render(request=request, 
 				  template_name="main/index.html",
 				 )			 
