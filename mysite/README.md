@@ -1,2 +1,8 @@
 - Here `main` is the name of django application
 - `mysite` is name of project and it contains project configurations.
+- To run this project in your local system:
+  - install requirements.txt dependencies
+  - in this directory open `command prompt` and give command:
+      - Windows: `python manage.py runserver` 
+      - Linux  : `python3 manage.py runserver`
+    - Project started running on localhost server.
