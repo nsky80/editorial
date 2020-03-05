@@ -1,5 +1,5 @@
 Python==3.5.x or above
-Django==2.2.4
+Django==3.0.4
 django-tinymce4-lite==1.7.5
 jsmin==2.2.2
 Pillow==6.1.0
